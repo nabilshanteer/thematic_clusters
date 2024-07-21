@@ -32,9 +32,11 @@ const ItemList = forwardRef(({itemList, setItemList, onDoubleClick, name}, ref) 
                             onClick={() => {setSelectedIndex(index)}} 
                             onDoubleClick={() => {onDoubleClick(item._id)}}
                             key={item._id.toString() + '_' + index.toString()}>
-                            <b>{item.name}</b> <br/>
-                            <small><b>ID: </b> {item._id.toString()}</small> <br/>
-                            {'type' in item ? <small><b>Type: </b>{item.type}</small>: <></>}
+                            <div className="text-left">
+                                <b>{item.name}</b> <br/>
+                                <small><b>ID: </b> {item._id.toString()}</small> <br/>
+                                {'type' in item ? <small><b>Type: </b>{item.type}</small>: <></>}
+                            </div>
                         </li>
                     ))}
                 </ul>
