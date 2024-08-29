@@ -53,6 +53,17 @@ async function document_add_data(data, filepath, type, tags=[]) {
     return id
 }
 
+/**
+ * Adds a new document to the collection, using the provided html string as the document's content. Takes a filepath to use as the document name, as well as a type to use for images. Returns the ObjectID for the new document.
+ * 
+ *
+ * @export
+ * @param {string} html
+ * @param {string} filepath
+ * @param {string} type
+ * @param {Array<string>} [tags=[]]
+ * @return {ObjectId} id
+ */
 export async function document_add_html(html, filepath, type, tags=[]) {
 
     const filename = filepath.split("/").at(-1)
@@ -78,6 +89,8 @@ export async function document_add_html(html, filepath, type, tags=[]) {
  * @param {string} html
  * @param {ObjectId} docid
  * @param {string} [fragName="testFragment"]
+ * @param {string} type
+ * @param {Array<string>} [tags=[]]
  * @return {ObjectId} 
  */
 export async function fragment_add_html(html, docid, fragName="testFragment", type, coords = null, tags=[]) {
@@ -520,7 +533,15 @@ export async function transcript_DialogueFromASpecificSpeaker(doc_id, speakerNam
 }
 
 
-
+/**
+ * Saves a new virtual floor. Takes an object containing the a2c and f2c object for the new floor, and returns the ID of the new floor.
+ * 
+ *
+ * @export
+ * @param {object} floor_object
+ * @param {string} name
+ * @return {ObjectId} insertedID 
+ */
 export async function floor_save(floor_object, name){
 
     //removes any circular references that stop JSON parsing from working when saving the floor.
@@ -536,6 +557,15 @@ export async function floor_save(floor_object, name){
     return id
 }
 
+/**
+ * Resaves an existing virtual floor. Takes an updated object containing the a2c and f2c object for the new floor, and returns the ID of the new floor.
+ * 
+ *
+ * @export
+ * @param {object} floor_object
+ * @param {string} name
+ * @return {ObjectId} insertedID 
+ */
 export async function floor_update(floor_object, floor_id, name){
 
     //removes any circular references that stop JSON parsing from working when saving the floor.
@@ -551,22 +581,49 @@ export async function floor_update(floor_object, floor_id, name){
     return id
 }
 
-
+/**
+ * Fetches all documents from the documents container
+ * Returns a list of document objects
+ *
+ * @export
+ * @return {Array<object>} 
+ */
 export async function documents_findAll(){
     const docs = await realm_getAllDocuments()
     return docs
 }
 
+/**
+ * Fetches all annotations from the annotations container
+ * Returns a list of annotation objects
+ *
+ * @export
+ * @return {Array<object>} 
+ */
 export async function annotations_findAll(){
     const annots = await realm_getAllAnnotations()
     return annots
 }
 
+/**
+ * Fetches all fragments from the fragments container
+ * Returns a list of fragment objects
+ *
+ * @export
+ * @return {Array<object>} 
+ */
 export async function fragments_findAll(){
     const fragments = await realm_getAllFragments()
     return fragments
 }
 
+/**
+ * Fetches all floors from the floors container
+ * Returns a list of floor objects
+ *
+ * @export
+ * @return {Array<object>} 
+ */
 export async function floors_findAll(){
     const vfs = await realm_getAllFloors()
 
